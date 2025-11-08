@@ -1,5 +1,3 @@
-import './index.css'
-
 document.querySelector("#app").innerHTML= `
 <div id="div">
 <h1>Вопросы</h1>
