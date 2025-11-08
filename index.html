@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
-    <script defer src="index.js"></script>
     <style>
       body {
         background-color: #0b0c10;
@@ -52,6 +51,36 @@
     <title>respreqta</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div id="div">
+        <h1>Вопросы</h1>
+        <ul id="questinos"></ul>
+      </div>
+    </div>
+    <script>
+      async function doit() {
+        const ul = document.querySelector("#questions");
+        const res = await fetch(
+          "https://cloud-api.yandex.net/v1/disk/public/resources?public_key=https%3A%2F%2Fdisk.yandex.ru%2Fd%2FOC4Fb8h47w8Ogw"
+        );
+        const resjsn = await res.json();
+
+        for (let index = 0; index < resjsn._embedded.items.length; index++) {
+          const doc = resjsn._embedded.items[index];
+          const name = doc.name;
+
+          let newLi = document.createElement("li");
+          let newBtn = document.createElement("a");
+          newBtn.textContent = name.substring(0, name.lastIndexOf("."));
+          newBtn.href = doc.public_url;
+          newBtn.target = "_blank";
+
+          newLi.append(newBtn);
+          ul.append(newLi);
+        }
+      }
+
+      doit();
+    </script>
   </body>
 </html>
