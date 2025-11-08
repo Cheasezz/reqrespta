@@ -12,7 +12,8 @@
       a,
       body {
         margin: 0;
-        padding: 0;
+        /* padding: 0; */
+        padding-top: var(--tg-safe-area-inset-top);
         border: 0;
         font-size: 100%;
         font: inherit;
@@ -58,6 +59,9 @@
       </div>
     </div>
     <script>
+      const tg = window.Telegram.WebApp;
+      document.body.style.paddingTop = tg.safeAreaInset.top + "px";
+
       async function doit() {
         const ul = document.querySelector("#questions");
         const res = await fetch(
@@ -65,7 +69,6 @@
         );
         const resjsn = await res.json();
         console.log(resjsn);
-        
 
         for (let index = 0; index < resjsn._embedded.items.length; index++) {
           const doc = resjsn._embedded.items[index];
