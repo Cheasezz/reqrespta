@@ -1,7 +1,4 @@
 import './index.css'
-import {init} from "@tma.js/sdk"
-
-init()
 
 document.querySelector("#app").innerHTML= `
 <div id="div">
